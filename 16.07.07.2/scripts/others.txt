@@ -1,0 +1,87 @@
+event HudLowAmmoPulse
+{
+    Animate HudWeaponLowAmmoImage       Alpha   "255"                   Linear 0.0      0.075
+    Animate HudWeaponLowAmmoImage       Alpha   "0"                     Linear 0.125    0.075
+    
+    Animate AmmoInClip                  FgColor "Ammo In Clip Low"          Linear 0.0      0.000
+
+    Animate AmmoInReserve               FgColor "Ammo In Reserve Low"   Linear 0.0      0.000
+
+    Animate AmmoNoClip                  FgColor "Ammo In Clip Low"      Linear 0.0      0.000
+    
+    RunEvent HudLowAmmoPulseLoop    0.25
+}
+
+// call to loop HudLowAmmoPulse
+event HudLowAmmoPulseLoop
+{
+    RunEvent HudLowAmmoPulse 0.0
+}
+
+event HudLowAmmoPulseStop
+{
+    StopEvent HudLowAmmoPulse 0.0
+    StopEvent HudLowAmmoPulseLoop 0.0
+    
+    Animate   AmmoInClip        FgColor     "Ammo In Clip"          Accel 0.0 0.0
+    
+    Animate   AmmoInReserve     FgColor     "Ammo In Reserve"       Accel 0.0 0.0
+
+    Animate   AmmoNoClip        FgColor     "Ammo In Clip"          Accel 0.0 0.0
+}
+
+event TeamStatus_PlayerDead
+{
+    SetVisible DeathPanel  1 0
+    SetVisible SkullPanel  1 0
+    SetVisible respawntime 1 0
+    SetVisible FreshSpawn  0 0
+}
+event TeamStatus_PlayerAlive
+{
+    SetVisible DeathPanel  0 0.2
+    SetVisible SkullPanel  0 0.2
+    SetVisible respawntime 0 0.2
+
+    //SetVisible FreshSpawn  1 0.2
+    //SetVisible FreshSpawn  0 6
+}
+
+event MMenu_PlayList_Expand
+{
+    Animate ItemsContainer          ypos 420 Spline 0 0.4
+    Animate EventPromo              ypos 470 Spline 0 0.4
+    Animate SafeMode                ypos 470 Spline 0 0.4
+    Animate VRBGPanel               ypos 633 Spline 0 0.4
+    Animate VRModeButton            ypos 639 Spline 0 0.4
+    Animate ShowPromoCodesButton    ypos 639 Spline 0 0.4
+
+    Animate PlayListContainer Tall 260   Spline 0.0 0.40
+
+    FireCommand 0 "soundentry Panel.SlideDown"
+}
+
+event MMenu_PlayList_Collapse
+{
+    Animate ItemsContainer          ypos 160 Spline 0 0.4
+    Animate EventPromo              ypos 210 Spline 0 0.4
+    Animate SafeMode                ypos 210 Spline 0 0.4
+    Animate VRBGPanel               ypos 373 Spline 0 0.4
+    Animate VRModeButton            ypos 379 Spline 0 0.4
+    Animate ShowPromoCodesButton    ypos 379 Spline 0 0.4
+
+    Animate PlayListContainer Tall 0 Spline 0 0.4
+
+    FireCommand 0 "soundentry Panel.SlideUp"
+}
+
+event MMenu_PlayList_Collapse_Immediate
+{
+    Animate ItemsContainer          ypos 160 Spline 0 0
+    Animate EventPromo              ypos 210 Spline 0 0
+    Animate VRBGPanel               ypos 373 Spline 0 0
+    Animate VRModeButton            ypos 379 Spline 0 0
+    Animate ShowPromoCodesButton    ypos 379 Spline 0 0
+
+    Animate PlayListContainer Tall 0 Spline 0 0
+}
